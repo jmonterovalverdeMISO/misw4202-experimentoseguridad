@@ -11,7 +11,7 @@ app_context.push()
 cors = CORS(app)
 
 api = Api(app)
-api.add_resource(VistaHistoriaClinica, '/historiaclinica/<int:id_cancion>')
+api.add_resource(VistaHistoriaClinica, '/historiaclinica')
 
 jwt = JWTManager(app)
 
