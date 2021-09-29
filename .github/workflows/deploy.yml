@@ -1,0 +1,52 @@
+name: Deployment
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  autenticador:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: akhileshns/heroku-deploy@v3.12.12
+        with:
+          heroku_api_key: "763aff5c-1b42-43b4-83de-59b3d98a8f55"
+          heroku_app_name: "autenticador-grupo5"
+          heroku_email: "jelimv@hotmail.com"
+          appdir: "autenticador"
+
+  serviciohistoriaclinica:
+    needs: autenticador
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: akhileshns/heroku-deploy@v3.12.12
+        with:
+          heroku_api_key: "763aff5c-1b42-43b4-83de-59b3d98a8f55"
+          heroku_app_name: "serviciohistoriaclinica-grupo5"
+          heroku_email: "jelimv@hotmail.com"
+          appdir: "serviciohistoriaclinica"
+
+  servicioregistropaciente:
+    needs: serviciohistoriaclinica
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: akhileshns/heroku-deploy@v3.12.12
+        with:
+          heroku_api_key: "763aff5c-1b42-43b4-83de-59b3d98a8f55"
+          heroku_app_name: "servicioregistropaciente-grupo5"
+          heroku_email: "jelimv@hotmail.com"
+          appdir: "servicioregistropaciente"
+
+  api-gateway:
+    needs: servicioregistropaciente
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: akhileshns/heroku-deploy@v3.12.12
+        with:
+          heroku_api_key: "763aff5c-1b42-43b4-83de-59b3d98a8f55"
+          heroku_app_name: "api-gateway-grupo5"
+          heroku_email: "jelimv@hotmail.com"
+          appdir: "api-gateway"
