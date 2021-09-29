@@ -9,9 +9,9 @@ import json
 class VistaRegistroPaciente(Resource):
 
     @jwt_required()
-    def post(self, id_usuario):
-        return "creación ejecutada", 200
+    def get(self, id_usuario):
+        return "consulta ejecutada", 200
 
     @jwt_required()
-    def put(self, id_usuario):
+    def post(self, id_usuario):
         return "Modificación ejecutada", 200
